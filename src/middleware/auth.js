@@ -3,14 +3,21 @@ const User = require('../models/user')
 
 const auth = async(req, res, next) => {
     try {
+
+        // read in bearer auth code and remove the string 'Bearer'
         const token = req.header('Authorization').replace('Bearer ', '')
+
+        // verify token from req with secret 
         const decoded = jwt.verify(token, 'thisIsMyNewCourse')
+
+        // since id is encoded in authToken, lookup user by decoded id
         const user = await User.findOne({ _id: decoded._id, 'tokens.token': token })
 
         if (!user) {
             throw new Error()
         }
 
+        req.token = token
         req.user = user
         next()
     } catch (e) {
