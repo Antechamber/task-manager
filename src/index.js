@@ -9,11 +9,8 @@ const port = process.env.PORT
 
 // set express app to expect requests obects as JSON
 app.use(express.json())
-app.use((req, res, next) => {
-        console.log(req.method, req.path)
-        next()
-    })
-    // routers
+
+// routers
 app.use(userRouter)
 app.use(taskRouter)
 
