@@ -57,6 +57,7 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
+// properties of User object which are not actually saved as part of the user document in the db
 userSchema.virtual('tasks', {
     ref: 'Task',
     localField: '_id',

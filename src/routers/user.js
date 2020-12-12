@@ -115,7 +115,7 @@ router.patch('/users/me', auth, async(req, res) => {
     const isValidUpdate = updates.every((update) => allowedUpdates.includes(update))
         // if any updates are not in allowedUpdates, return error and status code 400 (bad request)
     if (!isValidUpdate) {
-        res.status(400).send({ error: 'Invalid updates!' })
+        return res.status(400).send({ error: 'Invalid updates!' })
     }
     try {
         // loop through updates array and apply all updates to user
